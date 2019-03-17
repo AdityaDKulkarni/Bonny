@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "906269655013",
+    "firebase_url": "https://bonnyparent.firebaseio.com",
+    "project_id": "bonnyparent",
+    "storage_bucket": "bonnyparent.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:906269655013:android:0741218b58e1c463",
+        "android_client_info": {
+          "package_name": "com.bonny.bonnyparent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "906269655013-vqvvegc7ggnf3tbrtmku0sc1qi66hbr0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bonny.bonnyparent",
+            "certificate_hash": "3cb720fa44d45c0162b619a696d54219ca1e6358"
+          }
+        },
+        {
+          "client_id": "906269655013-hf2hcr3be1ksb4svt3j3gjg52dqvi8rc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAldskSng0U7WtbrsqQ1rHXqIcUyLq9gQU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "906269655013-hf2hcr3be1ksb4svt3j3gjg52dqvi8rc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

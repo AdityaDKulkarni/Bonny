@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/d5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/d8dp">
+
+        <TextView
+            android:id="@+id/tvBabyGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/d8dp"
+            android:background="@drawable/circle_shape"
+            android:gravity="center"
+            android:padding="@dimen/d2dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/s24sp" />
+
+        <TextView
+            android:id="@+id/tvBabyFirstName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/tvBabyGender"
+            android:layout_toRightOf="@id/tvBabyGender"
+            android:gravity="center_vertical"
+            android:padding="@dimen/d2dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/s18sp"
+            android:textStyle="bold|italic"
+            tools:ignore="RtlCompat" />
+
+        <TextView
+            android:id="@+id/tvBabyBirthDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tvBabyFirstName"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/d24dp"
+            android:gravity="center_vertical"
+            android:padding="@dimen/d2dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/s18sp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/d24dp" />
+
+        <ImageButton
+            android:id="@+id/imgBtnBloodGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tvBabyBloodGroup"
+            android:layout_alignTop="@id/tvBabyBloodGroup"
+            android:layout_toEndOf="@id/tvBabyGender"
+            android:layout_toRightOf="@id/tvBabyGender"
+            android:background="@null"
+            android:src="@drawable/ic_blood" />
+
+        <TextView
+            android:id="@+id/tvBabyBloodGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvBabyFirstName"
+            android:layout_marginLeft="@dimen/d2dp"
+            android:layout_marginStart="@dimen/d2dp"
+            android:layout_marginTop="@dimen/d10dp"
+            android:layout_toEndOf="@id/imgBtnBloodGroup"
+            android:layout_toRightOf="@id/imgBtnBloodGroup"
+            android:gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="@dimen/s18sp" />
+
+        <ImageButton
+            android:id="@+id/imgBtnWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tvBabyBloodGroup"
+            android:layout_alignTop="@id/tvBabyBloodGroup"
+            android:background="@null"
+            android:padding="@dimen/d2dp"
+            android:layout_toStartOf="@id/tvBabyWeight"
+            android:src="@drawable/ic_weight"
+            android:layout_toLeftOf="@id/tvBabyWeight" />
+
+
+        <TextView
+            android:id="@+id/tvBabyWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tvBabyBloodGroup"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/d24dp"
+            android:gravity="center_vertical"
+            android:padding="@dimen/d2dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/s18sp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/d24dp" />
+
+        <ImageButton
+            android:id="@+id/imgBtnHospital"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tvBabyPlaceOfBirth"
+            android:layout_alignTop="@id/tvBabyPlaceOfBirth"
+            android:layout_toEndOf="@id/tvBabyGender"
+            android:layout_toRightOf="@id/tvBabyGender"
+            android:background="@null"
+            android:src="@drawable/ic_hospital" />
+
+
+        <TextView
+            android:id="@+id/tvBabyPlaceOfBirth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvBabyBloodGroup"
+            android:layout_marginStart="@dimen/d2dp"
+            android:layout_toEndOf="@id/imgBtnHospital"
+            android:ellipsize="marquee"
+            android:gravity="start"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/d10dp"
+            android:padding="@dimen/d2dp"
+            android:textSize="@dimen/s18sp"
+            android:layout_marginLeft="@dimen/d2dp"
+            android:layout_toRightOf="@id/imgBtnHospital" />
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

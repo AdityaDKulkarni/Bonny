@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#303F9F</color>
+    <color name="colorAccentPink">#FF4081</color>
+
+    <color name="colorPrimaryBlue">#039BE5</color>
+    <color name="colorPrimaryDark">#03A9F4</color>
+    <color name="colorAccent">#0288D1</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <color name="dot_dark_screen3">#2278d4</color>
+
+    <!-- dots active colors -->
+    <color name="dot_light_screen3">#93c6fd</color>
+    <color name="activity_background">#E1F5FE</color>
+    <color name="yellow">#FBC02D</color>
+    <color name="green">#689F38</color>
+    <color name="grey">#beb8b8</color>
+    <color name="navyblue">#003366</color>
+</resources>

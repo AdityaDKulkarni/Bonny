@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/activity_background"
+    android:orientation="vertical"
+    tools:context="com.bonny.bonnyparent.ui.AppointmentDetailsActivity">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardPHCDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/d8dp"
+        android:elevation="@dimen/d5dp"
+        app:cardCornerRadius="@dimen/d5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/d8dp">
+
+            <TextView
+                android:id="@+id/tvPHCDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/s16sp"
+                android:textStyle="bold"
+                android:text="@string/phc_details"
+                android:gravity="center_horizontal"/>
+
+            <ImageButton
+                android:id="@+id/imgBtnPHCName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:layout_alignTop="@id/tvPHCName"
+                android:layout_alignBottom="@id/tvPHCName"
+                android:src="@drawable/ic_hospital" />
+
+            <TextView
+                android:id="@+id/tvPHCName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d4dp"
+                android:layout_marginTop="@dimen/d8dp"
+                android:layout_below="@+id/tvPHCDetails"
+                android:layout_toEndOf="@id/imgBtnPHCName"
+                android:ellipsize="marquee"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/s18sp"
+                android:layout_marginLeft="@dimen/d4dp"
+                android:layout_toRightOf="@id/imgBtnPHCName" />
+
+            <ImageButton
+                android:id="@+id/imgBtnPHCAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/tvPHCAddress"
+                android:layout_alignTop="@id/tvPHCAddress"
+                android:background="@null"
+                android:src="@drawable/ic_location" />
+
+            <TextView
+                android:id="@+id/tvPHCAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvPHCName"
+                android:layout_marginStart="@dimen/d4dp"
+                android:layout_marginTop="@dimen/d12dp"
+                android:layout_toEndOf="@id/imgBtnPHCAddress"
+                android:ellipsize="marquee"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/s18sp"
+                android:layout_marginLeft="@dimen/d4dp"
+                android:layout_toRightOf="@id/imgBtnPHCAddress" />
+
+            <ImageButton
+                android:id="@+id/imgBtnPHCEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/tvPHCEmail"
+                android:layout_alignTop="@id/tvPHCEmail"
+                android:background="@null"
+                android:src="@drawable/ic_email" />
+
+            <TextView
+                android:id="@+id/tvPHCEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvPHCAddress"
+                android:layout_marginStart="@dimen/d4dp"
+                android:layout_marginTop="@dimen/d12dp"
+                android:layout_toEndOf="@id/imgBtnPHCEmail"
+                android:ellipsize="marquee"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/s18sp"
+                android:layout_marginLeft="@dimen/d4dp"
+                android:layout_toRightOf="@id/imgBtnPHCEmail" />
+
+            <ImageButton
+                android:id="@+id/imgBtnPHCContact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/tvPHCContact"
+                android:layout_alignTop="@id/tvPHCContact"
+                android:background="@null"
+                android:src="@drawable/ic_telephone" />
+
+            <TextView
+                android:id="@+id/tvPHCContact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvPHCEmail"
+                android:layout_marginStart="@dimen/d4dp"
+                android:layout_marginTop="@dimen/d12dp"
+                android:layout_toEndOf="@id/imgBtnPHCEmail"
+                android:ellipsize="marquee"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/s18sp"
+                android:layout_marginLeft="@dimen/d4dp"
+                android:layout_toRightOf="@id/imgBtnPHCEmail" />
+
+            <ImageButton
+                android:id="@+id/imgBtnPHCDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/tvPHCDate"
+                android:layout_alignTop="@id/tvPHCDate"
+                android:background="@null"
+                android:src="@drawable/ic_calendar" />
+
+            <TextView
+                android:id="@+id/tvPHCDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvPHCContact"
+                android:layout_marginStart="@dimen/d4dp"
+                android:layout_marginTop="@dimen/d12dp"
+                android:layout_toEndOf="@id/imgBtnPHCDate"
+                android:ellipsize="marquee"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/s18sp"
+                android:layout_marginLeft="@dimen/d4dp"
+                android:layout_toRightOf="@id/imgBtnPHCDate" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="@dimen/s16sp"
+        android:textStyle="bold"
+        android:text="@string/list_of_vaccines"
+        android:gravity="center_horizontal"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvRecords"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/d4dp"/>
+
+</LinearLayout>
