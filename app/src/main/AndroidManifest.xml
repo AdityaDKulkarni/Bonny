@@ -28,7 +28,6 @@
             android:name=".ui.AllBabiesActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.BabyDetailsActivity" />
-
         <activity android:name=".ui.AppointmentDetailsActivity" />
 
         <service android:name=".config.FCMService">
@@ -36,12 +35,13 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <service android:name=".config.FCMInstaceService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
+        <activity android:name=".ui.NotificationActivity"></activity>
     </application>
 
 </manifest>

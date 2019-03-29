@@ -36,4 +36,8 @@
     <dimen name="d100dp">100dp</dimen>
     <dimen name="d26dp">26dp</dimen>
     <dimen name="d34dp">34dp</dimen>
+    <dimen name="d1dp">1dp</dimen>
+    <dimen name="d60dp">60dp</dimen>
+    <dimen name="s12sp">12sp</dimen>
+    <dimen name="d25dp">25dp</dimen>
 </resources>

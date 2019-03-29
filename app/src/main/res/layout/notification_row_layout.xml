@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/d8dp"
+    android:elevation="@dimen/d8dp"
+    app:cardCornerRadius="@dimen/d8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvNotifTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_margin="@dimen/d8dp"
+            android:layout_toLeftOf="@id/tvNotifTime"
+            android:layout_toStartOf="@id/tvNotifTime"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/s18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvNotifBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/tvNotifTitle"
+            android:layout_marginBottom="@dimen/d8dp"
+            android:layout_marginEnd="@dimen/d8dp"
+            android:layout_marginStart="@dimen/d8dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/s16sp" />
+
+        <TextView
+            android:id="@+id/tvNotifTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/tvNotifTitle"
+            android:layout_marginEnd="@dimen/d8dp"
+            android:layout_marginRight="@dimen/d8dp"
+            android:textColor="@color/dark_grey"
+            android:textSize="@dimen/s16sp" />
+
+        <TextView
+            android:id="@+id/tvType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/tvNotifBody"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/d8dp"
+            android:layout_marginRight="@dimen/d8dp"
+            android:background="@drawable/shape_notif_type_info"
+            android:textColor="@color/white"
+            android:textSize="@dimen/s12sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

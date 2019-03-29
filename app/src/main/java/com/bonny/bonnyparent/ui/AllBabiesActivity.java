@@ -22,6 +22,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ import com.bonny.bonnyparent.config.RetrofitConfig;
 import com.bonny.bonnyparent.listener.RecyclerViewListener;
 import com.bonny.bonnyparent.managers.LoginSessionManager;
 import com.bonny.bonnyparent.models.BabyModel;
+import com.bonny.bonnyparent.models.NotificationModel;
 import com.bonny.bonnyparent.models.ScheduleLists;
 import com.bonny.bonnyparent.models.UserModel;
 import com.bonny.bonnyparent.models.VaccineModel;
@@ -49,6 +51,9 @@ import retrofit2.Response;
 public class AllBabiesActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private NavigationView navigationView;
+    private ArrayList<NotificationModel> notificationModels;
+    private ImageButton imgBtnNotif;
+    private Toolbar toolbar;
     private View navHeaderView;
     private TextView tvName, tvEmail;
     private RecyclerView babyDetails;
@@ -62,7 +67,7 @@ public class AllBabiesActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_babies);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getString(R.string.all_babies));
 
@@ -75,18 +80,18 @@ public class AllBabiesActivity extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
         swipeRefreshLayout = findViewById(R.id.swipeLayout);
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
 
         intitUi();
+        getNotifs();
         getAllBabies();
         swipe();
 
     }
 
     private void intitUi() {
-
+        imgBtnNotif = toolbar.findViewById(R.id.imgBtnNotif);
         navHeaderView = navigationView.getHeaderView(0);
         tvName = navHeaderView.findViewById(R.id.tvHeaderName);
         tvEmail = navHeaderView.findViewById(R.id.tvHeaderEmail);
@@ -238,6 +243,44 @@ public class AllBabiesActivity extends AppCompatActivity
             finishAffinity();
 
         }
+    }
+
+    private void getNotifs(){
+        API api = new RetrofitConfig().config();
+        Call<List<NotificationModel>> call = api.getNotifs(sessionManager.getUserDetails().get("key"));
+
+        call.enqueue(new Callback<List<NotificationModel>>() {
+            @Override
+            public void onResponse(Call<List<NotificationModel>> call, Response<List<NotificationModel>> response) {
+                if(response.code() == 200){
+                    notificationModels = new ArrayList<>();
+                    for(int i = 0; i < response.body().size(); i++){
+                        if(!response.body().get(i).isStatus()){
+                            imgBtnNotif.setImageDrawable(getResources().getDrawable(R.drawable.ic_notification_received));
+                            break;
+                        }
+                    }
+
+                    for(int i = 0; i < response.body().size(); i++){
+                        notificationModels.add(response.body().get(i));
+                    }
+
+                    imgBtnNotif.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(AllBabiesActivity.this, NotificationActivity.class);
+                            intent.putExtra("notifs", notificationModels);
+                            startActivity(intent);
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<NotificationModel>> call, Throwable t) {
+                Toast.makeText(AllBabiesActivity.this, getString(R.string.something_went_wrong), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 

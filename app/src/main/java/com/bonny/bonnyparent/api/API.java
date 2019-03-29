@@ -2,6 +2,7 @@ package com.bonny.bonnyparent.api;
 
 import com.bonny.bonnyparent.models.AppointmentModel;
 import com.bonny.bonnyparent.models.BabyModel;
+import com.bonny.bonnyparent.models.NotificationModel;
 import com.bonny.bonnyparent.models.ParentModel;
 import com.bonny.bonnyparent.models.TokenModel;
 import com.bonny.bonnyparent.models.UserModel;
@@ -78,6 +79,11 @@ public interface API {
             @Field("device_id") String id,
             @Field("active") boolean active,
             @Field("type") String type
+    );
+
+    @GET("api/notifications/")
+    Call<List<NotificationModel>> getNotifs(
+            @Header("Authorization") String userToken
     );
 
 }

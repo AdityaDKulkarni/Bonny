@@ -5,6 +5,7 @@
     <color name="colorAccentPink">#FF4081</color>
 
     <color name="colorPrimaryBlue">#039BE5</color>
+    <color name="colorPrimaryBlue_light">#7ebfdf</color>
     <color name="colorPrimaryDark">#03A9F4</color>
     <color name="colorAccent">#0288D1</color>
     <color name="white">#FFFFFF</color>
@@ -17,6 +18,8 @@
     <color name="activity_background">#E1F5FE</color>
     <color name="yellow">#FBC02D</color>
     <color name="green">#689F38</color>
+    <color name="green_light">#9bcf6e</color>
     <color name="grey">#beb8b8</color>
     <color name="navyblue">#003366</color>
+    <color name="dark_grey">#747373</color>
 </resources>
