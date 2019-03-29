@@ -64,6 +64,7 @@ public class AllBabiesActivity extends AppCompatActivity
         setContentView(R.layout.activity_all_babies);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(getString(R.string.all_babies));
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

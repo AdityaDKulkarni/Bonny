@@ -21,12 +21,14 @@
             android:elevation="@dimen/d0dp"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
-            <TextView
-                android:layout_width="match_parent"
+            <ImageButton
+                android:id="@+id/imgBtnNotif"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Baby Details"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp" />
+                android:background="@null"
+                android:layout_marginEnd="@dimen/d8dp"
+                android:src="@drawable/ic_notification"
+                android:layout_gravity="end"/>
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
