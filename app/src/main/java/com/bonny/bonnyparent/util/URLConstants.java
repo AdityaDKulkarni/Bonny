@@ -6,5 +6,5 @@ package com.bonny.bonnyparent.util;
 
 public interface URLConstants {
     String BASE_URL = "https://ameydarekar.pythonanywhere.com/";
-   // String BASE_URL = "https://36a49128.ngrok.io/";
+    //String BASE_URL = "https://e5968ae8.ngrok.io/";
 }

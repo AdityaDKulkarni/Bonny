@@ -35,6 +35,9 @@ public interface API {
             @Query("pk") int pk
     );
 
+    @GET("api/users/")
+    Call<List<UserModel>> getExistingUsers();
+
     @GET("api/appointments/")
     Call<List<AppointmentModel>> getAppointments(
             @Header("Authorization") String key,
@@ -46,6 +49,15 @@ public interface API {
     Call<TokenModel> getToken(
             @Field("username") String username,
             @Field("password") String password
+    );
+
+    @POST("auth/api/register/")
+    @FormUrlEncoded
+    Call<TokenModel> register(
+            @Field("username") String username,
+            @Field("email") String email,
+            @Field("password1") String password1,
+            @Field("password2") String password2
     );
 
     @GET("api/schedule/")

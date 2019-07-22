@@ -41,7 +41,9 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".ui.NotificationActivity"></activity>
+        <activity android:name=".ui.NotificationActivity" />
+        <activity android:name=".ui.RegisterActivity" />
+        <activity android:name=".ui.UpdateProfileActivity"></activity>
     </application>
 
 </manifest>
