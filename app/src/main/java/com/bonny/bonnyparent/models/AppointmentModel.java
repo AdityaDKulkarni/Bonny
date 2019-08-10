@@ -6,7 +6,7 @@ package com.bonny.bonnyparent.models;
 
 public class AppointmentModel {
     private int id,baby;
-    private String administered_on;
+    private String administered_on, status;
     private Administered_at administered_at;
 
     public int getId() {
@@ -23,6 +23,14 @@ public class AppointmentModel {
 
     public void setBaby(int baby) {
         this.baby = baby;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Administered_at getAdministered_at() {

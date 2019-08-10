@@ -26,7 +26,7 @@ public class BabyDetailsActivity extends AppCompatActivity {
     private BabyModel babyModel;
     private TextView tvBName;
     private String name;
-    private Button btnedit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,22 +36,13 @@ public class BabyDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(getString(R.string.title_activity_baby_details));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 */
-        btnedit=findViewById(R.id.btnEdit);
-        btnedit.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View view) {
-               /* Intent intent = new Intent(BabyDetailsActivity.this, BabyFormActivity.class);
-                startActivity(intent);*/
-            }
-        });
-        tvBName=findViewById(R.id.tvBabyName);
+        tvBName = findViewById(R.id.tvBabyName);
 
 
-
-        if(getIntent().hasExtra("babyModel")){
+        if (getIntent().hasExtra("babyModel")) {
             babyModel = (BabyModel) getIntent().getExtras().get("babyModel");
-            name=babyModel.getFirst_name();
+            name = babyModel.getFirst_name();
         }
 
         initUi();
@@ -88,8 +79,8 @@ public class BabyDetailsActivity extends AppCompatActivity {
         });
     }
 
-    private void initUi(){
-        Bundle extras=getIntent().getExtras();
+    private void initUi() {
+        Bundle extras = getIntent().getExtras();
         viewPager = findViewById(R.id.vPSchedule);
         tvBName.setText(name);
 

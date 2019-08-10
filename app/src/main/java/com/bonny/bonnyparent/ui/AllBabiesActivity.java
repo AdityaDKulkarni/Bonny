@@ -7,12 +7,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,7 +17,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -29,10 +25,12 @@ import android.widget.Toast;
 import com.bonny.bonnyparent.R;
 import com.bonny.bonnyparent.adapters.BabyRecyclerAdapter;
 import com.bonny.bonnyparent.api.API;
+import com.bonny.bonnyparent.comparators.WeekComparator;
 import com.bonny.bonnyparent.config.RetrofitConfig;
 import com.bonny.bonnyparent.listener.RecyclerViewListener;
 import com.bonny.bonnyparent.managers.LoginSessionManager;
 import com.bonny.bonnyparent.models.BabyModel;
+import com.bonny.bonnyparent.models.FormDataHolder;
 import com.bonny.bonnyparent.models.NotificationModel;
 import com.bonny.bonnyparent.models.ScheduleLists;
 import com.bonny.bonnyparent.models.UserModel;
@@ -41,6 +39,7 @@ import com.bonny.bonnyparent.util.ProgressDialogUtil;
 import com.bonny.bonnyparent.util.Utils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -56,12 +55,14 @@ public class AllBabiesActivity extends AppCompatActivity
     private Toolbar toolbar;
     private View navHeaderView;
     private TextView tvName, tvEmail;
-    private RecyclerView babyDetails;
+    private RecyclerView rvBabies;
     private HashMap<String, String> userDetails;
     private String username, email, key, TAG = getClass().getSimpleName();
     private LoginSessionManager sessionManager;
     private SwipeRefreshLayout swipeRefreshLayout;
     private ArrayList<BabyModel> babyModels;
+    private API api;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,12 +80,14 @@ public class AllBabiesActivity extends AppCompatActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        api = new RetrofitConfig().config();
+        progressDialog = new ProgressDialogUtil().progressDialog(AllBabiesActivity.this,
+                "Getting schedule...", false);
 
         swipeRefreshLayout = findViewById(R.id.swipeLayout);
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
 
         intitUi();
-        getNotifs();
         getAllBabies();
         swipe();
 
@@ -95,14 +98,21 @@ public class AllBabiesActivity extends AppCompatActivity
         navHeaderView = navigationView.getHeaderView(0);
         tvName = navHeaderView.findViewById(R.id.tvHeaderName);
         tvEmail = navHeaderView.findViewById(R.id.tvHeaderEmail);
-        babyDetails = findViewById(R.id.babyDetails);
-        babyDetails.setLayoutManager(new LinearLayoutManager(this));
+        rvBabies = findViewById(R.id.babyDetails);
+        rvBabies.setLayoutManager(new LinearLayoutManager(this));
         sessionManager = new LoginSessionManager(AllBabiesActivity.this);
         userDetails = sessionManager.getUserDetails();
         username = userDetails.get("username");
         key = userDetails.get("key");
-
         tvName.setText(username);
+
+
+        imgBtnNotif.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getNotifs();
+            }
+        });
 
 
     }
@@ -118,7 +128,6 @@ public class AllBabiesActivity extends AppCompatActivity
 
     private synchronized void getAllBabies() {
         swipeRefreshLayout.setRefreshing(true);
-        API api = new RetrofitConfig().config();
 
         Call<List<BabyModel>> call = api.getAllBabies(key);
         call.enqueue(new Callback<List<BabyModel>>() {
@@ -139,15 +148,17 @@ public class AllBabiesActivity extends AppCompatActivity
                             babyModel.setWeight(response.body().get(i).getWeight());
                             babyModels.add(babyModel);
                         }
-                        babyDetails.setAdapter(new BabyRecyclerAdapter(AllBabiesActivity.this, babyModels));
+                        rvBabies.setAdapter(new BabyRecyclerAdapter(AllBabiesActivity.this, babyModels));
 
                         if (swipeRefreshLayout.isRefreshing()) {
                             swipeRefreshLayout.setRefreshing(false);
                         }
-                        babyDetails.addOnItemTouchListener(new RecyclerViewListener(AllBabiesActivity.this,
-                                babyDetails, new RecyclerViewListener.OnItemClickListener() {
+                        rvBabies.addOnItemTouchListener(new RecyclerViewListener(AllBabiesActivity.this,
+                                rvBabies, new RecyclerViewListener.OnItemClickListener() {
                             @Override
                             public void onItemClick(View view, int position) {
+                                FormDataHolder.selectedBabyModel = babyModels.get(position);
+                                FormDataHolder.selectedBabyId = babyModels.get(position).getId();
                                 getSchedule(babyModels.get(position).getId(), position);
                             }
 
@@ -156,7 +167,7 @@ public class AllBabiesActivity extends AppCompatActivity
 
                             }
                         }));
-                        babyDetails.setAdapter(new BabyRecyclerAdapter(AllBabiesActivity.this, babyModels));
+                        rvBabies.setAdapter(new BabyRecyclerAdapter(AllBabiesActivity.this, babyModels));
 
                         break;
                     case 500:
@@ -173,11 +184,7 @@ public class AllBabiesActivity extends AppCompatActivity
 
             private void getSchedule(int pk, final int position) {
                 final ArrayList<VaccineModel> vaccineModels = new ArrayList<>();
-                final ProgressDialog progressDialog = new ProgressDialogUtil().progressDialog(AllBabiesActivity.this,
-                        "Getting schedule...", false);
                 progressDialog.show();
-
-                API api = new RetrofitConfig().config();
                 Call<List<VaccineModel>> call = api.getSchedule(new LoginSessionManager(AllBabiesActivity.this).getUserDetails().get("key"), pk);
                 call.enqueue(new Callback<List<VaccineModel>>() {
                     @Override
@@ -203,6 +210,7 @@ public class AllBabiesActivity extends AppCompatActivity
                                         ScheduleLists.currentWeekVaccineList.add(vaccineModel);
                                     }
                                 }
+                                Collections.sort(vaccineModels, new WeekComparator());
                                 ScheduleLists.fullScheduleList = vaccineModels;
                                 Intent intent = new Intent(AllBabiesActivity.this, BabyDetailsActivity.class);
                                 intent.putExtra("babyModel", babyModels.get(position));
@@ -245,39 +253,40 @@ public class AllBabiesActivity extends AppCompatActivity
         }
     }
 
-    private void getNotifs(){
-        API api = new RetrofitConfig().config();
-        Call<List<NotificationModel>> call = api.getNotifs(sessionManager.getUserDetails().get("key"));
+    private void getNotifs() {
 
+        Call<List<NotificationModel>> call = api.getNotifs(sessionManager.getUserDetails().get("key"));
+        progressDialog.show();
         call.enqueue(new Callback<List<NotificationModel>>() {
             @Override
             public void onResponse(Call<List<NotificationModel>> call, Response<List<NotificationModel>> response) {
-                if(response.code() == 200){
+                if (response.code() == 200) {
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                    }
                     notificationModels = new ArrayList<>();
-                    for(int i = 0; i < response.body().size(); i++){
-                        if(!response.body().get(i).isStatus()){
+                    for (int i = 0; i < response.body().size(); i++) {
+                        if (!response.body().get(i).isStatus()) {
                             imgBtnNotif.setImageDrawable(getResources().getDrawable(R.drawable.ic_notification_received));
                             break;
                         }
                     }
 
-                    for(int i = 0; i < response.body().size(); i++){
+                    for (int i = 0; i < response.body().size(); i++) {
                         notificationModels.add(response.body().get(i));
                     }
 
-                    imgBtnNotif.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Intent intent = new Intent(AllBabiesActivity.this, NotificationActivity.class);
-                            intent.putExtra("notifs", notificationModels);
-                            startActivity(intent);
-                        }
-                    });
+                    Intent intent = new Intent(AllBabiesActivity.this, NotificationActivity.class);
+                    intent.putExtra("notifs", notificationModels);
+                    startActivity(intent);
                 }
             }
 
             @Override
             public void onFailure(Call<List<NotificationModel>> call, Throwable t) {
+                if(progressDialog.isShowing()){
+                    progressDialog.dismiss();
+                }
                 Toast.makeText(AllBabiesActivity.this, getString(R.string.something_went_wrong), Toast.LENGTH_LONG).show();
             }
         });
@@ -289,9 +298,7 @@ public class AllBabiesActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_logout) {
-            API api = new RetrofitConfig().config();
             Call<UserModel> call = api.logout();
-
             call.enqueue(new Callback<UserModel>() {
                 @Override
                 public void onResponse(Call<UserModel> call, Response<UserModel> response) {
@@ -308,10 +315,15 @@ public class AllBabiesActivity extends AppCompatActivity
                 }
             });
         }
-            DrawerLayout drawer = findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-            return true;
 
+        if(id == R.id.nav_notification){
+            getNotifs();
         }
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+
+    }
 
 }
