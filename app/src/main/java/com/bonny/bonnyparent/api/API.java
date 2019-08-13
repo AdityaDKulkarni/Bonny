@@ -98,4 +98,15 @@ public interface API {
             @Header("Authorization") String userToken
     );
 
+    @POST("api/parent/")
+    @FormUrlEncoded
+    Call<ParentModel> updateParent(@Header("Authorization") String key,
+                                   @Field("user") int user,
+                                   @Field("email") String email,
+                                   @Field("first_name") String first_name,
+                                   @Field("last_name") String last_name,
+                                   @Field("address") String address,
+                                   @Field("contact") String contact,
+                                   @Field("unique_id") String unique_id);
+
 }

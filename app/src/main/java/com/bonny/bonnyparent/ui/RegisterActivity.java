@@ -184,6 +184,7 @@ public class RegisterActivity extends AppCompatActivity {
                         intent.putExtra("pk", String.valueOf(pk));
                         intent.putExtra("username", username);
                         intent.putExtra("email", email);
+                        intent.putExtra("key", key);
 
                         new LoginSessionManager(RegisterActivity.this).createLoginSession(username, key);
                         startActivity(intent);

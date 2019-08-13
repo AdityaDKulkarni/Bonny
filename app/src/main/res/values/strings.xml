@@ -72,4 +72,5 @@
     <string name="contact_no">Contact number (+91 format)</string>
     <string name="save">Save</string>
     <string name="update_profile">Update profile</string>
+    <string name="registration_successfull">Registration successfull</string>
 </resources>
